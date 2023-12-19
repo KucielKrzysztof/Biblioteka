@@ -9,7 +9,7 @@
 	            <br>
 	            <table class="table">
 		            <tr>
-			            <th><h5>Pozycje: <strong>3</strong></h5></th>
+			            <th><h5>Pozycje: <strong>{{order.get_cart_items}}</strong></h5></th>
 			            <th>
 				        <a  style="float:right; margin:5px;" class="btn btn-custom-color2" href="{% url 'checkout' %}">Mam wszystko</a>
 			            </th>
@@ -26,11 +26,12 @@
                     <div style="flex:1"><strong>Ilość:</strong></div>
                 </div>
 
+				{% for item in items %}
                 <div class="cart-row">
-                    <div style="flex:2"><img class="row-image" src="{% static 'images/placeholder.png'%}"></div>
-                    <div style="flex:2">Ksiazka1</div>
+                    <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                    <div style="flex:2">{{item.product.name}}</div>
                     <div style="flex:1">
-                        <p class="quantity">2</p>
+                        <p class="quantity">{{item.quantity}}</p>
 			            <div class="quantity">
 				        <img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
 		
@@ -38,7 +39,7 @@
 			            </div>
                     </div>
                 </div>
-
+				{% endfor %}
 		    </div>
 	    </div>
     </div>

@@ -41,6 +41,18 @@ class Order(models.Model): #koszyk
 
     def __str__(self):
         return str(self.id) #id to autogenerowany primary key obiektu Order
+    
+    @property
+    def get_cart_items(self): #zlicza ile produktów ejst w koszyku
+        
+        order_items = self.orderitem_set.all()  # Pobierz wszystkie elementy OrderItem dla tego zamówienia
+        total_items = 0
+
+        # Zlicz wszystkie produkty sumując ich ilość
+        for item in order_items:
+            total_items += item.quantity
+
+        return total_items
 
 class OrderItem(models.Model): #produkt w koszyku
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
