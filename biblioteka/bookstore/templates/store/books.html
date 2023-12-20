@@ -12,10 +12,11 @@
             </div>
             <div class="col-6">
                 <div class="box-element text-center product-description" style="height: 200px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
-                    <h4 class="mb-0"><strong>{{ product.name }}</strong></h4>
-                    <hr>
-                    <p><strong>{{ product.name }}</strong></p>
-                    <p>{{ product.name|slice:"0:1"|upper }}{{ product.name|slice:"1:"|lower }}</p>
+                    <h4 class="mb-0"><strong>{{ product.name|title }}</strong></h4>
+                    <h5><strong>{{ product.author }}</strong></h5>
+                    <h6 class="mb-1">Gatunek: {{ product.genre }}</h6>
+                    <hr style="height: 0.05px; margin-bottom: 1rem;">
+                    <p>Krótki opis książki pt: {{ product.name|slice:"0:1"|upper }}{{ product.name|slice:"1:"|lower }}</p>
                 </div>
             </div>
             <div class="col-3">
@@ -25,8 +26,6 @@
                 </div>
             </div>
         </div>
-        
-        
     </div>
     {% endfor %}
 </div>
