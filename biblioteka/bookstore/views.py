@@ -18,5 +18,12 @@ def cart(request):
      return render(request, 'store/cart.html', context)
 
 def checkout(request):
-      context = {}
-      return render(request, 'store/checkout.html', context)
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     context = {'items': items, 'order':order}
+     return render(request, 'store/checkout.html', context)
