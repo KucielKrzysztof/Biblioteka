@@ -1,0 +1,25 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+    <h2 class="text-center mt-4 mb-4 box-element product">Polecane książki</h2>
+    
+<div class="row align-items-stretch">
+	{% for product in products %}
+	<div class="col-lg-4 d-flex flex-column">
+		<div class="h-100">
+        <img class="thumbnail" src="{{product.imageURL}}" alt="tu powinna być okladka">
+		<div class="box-element text-center product">
+            <h6><strong>{{product.name}}</strong></h6>
+            <hr>
+
+            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn btn-custom-color2 update-cart">Wypożycz</button>
+		    <a class="btn btn-custom-color3" href="#">Przeglądaj</a>
+		    
+		</div>
+		</div>
+	
+	</div>
+	{% endfor %}
+</div>
+{% endblock content %}
