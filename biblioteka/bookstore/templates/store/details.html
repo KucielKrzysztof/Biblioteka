@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <h2 class="text-center mt-4 mb-4 box-element product">Książka</h2>
+    <h2 class="text-center mt-4 mb-4 box-element product"><strong>{{ book.name|title }}</strong></h2>
 
     <div class="mb-3 w-100">
         <div class="row no-gutters">
@@ -11,11 +11,10 @@
             </div>
             <div class="col-6">
                 <div class="box-element text-center product-description" style="height: 200px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
-                    <h4 class="mb-0"><strong>{{ book.name|title }}</strong></h4>
                     <h5><strong>{{ book.author }}</strong></h5>
                     <h6 class="mb-1">Gatunek: {{ book.genre }}</h6>
                     <hr style="height: 0.05px; margin-bottom: 1rem;">
-                    <p>Krótki opis książki pt: {{ book.name|slice:"0:1"|upper }}{{ book.name|slice:"1:"|lower }}</p>
+                    <p>Opis: {{ book.name|slice:"0:1"|upper }}{{ book.name|slice:"1:"|lower }}</p>
                 </div>
             </div>
             <div class="col-3">

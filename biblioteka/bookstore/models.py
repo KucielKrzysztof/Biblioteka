@@ -17,7 +17,7 @@ class Product(models.Model):
     author = models.CharField(max_length=100, null=True)
     #description
     id = models.AutoField(primary_key=True, editable=False) #autonumerowane pole jako pk
-    isbn = models.CharField(max_length=17, null=True) #ISBN
+    isbn = models.CharField(max_length=17, unique=True, null=True) #ISBN
     #link dal pdf-ów
     image = models.ImageField(null=True, blank=True)
 
