@@ -1,11 +1,11 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-<h2 class="text-center mt-4 mb-4 box-element product">Kryminały</h2>
+<h2 class="text-center mt-4 mb-4 box-element product">Romantyczne</h2>
     
 <div class="row align-items-stretch">
     {% for product in products %}
-        {% if product.genre == 'Kryminał' %}
+        {% if product.genre == 'Romantyczne' %}
             <div class="mb-3 w-100">
                 <div class="row no-gutters">
                     <div class="col-3">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-3">
                         <div class="box-element text-center product-description" style="height: 200px; display: flex; flex-direction: column; justify-content: center;">
-                            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn btn-custom-color2 mb-2 mx-auto update-cart">Wypożycz</button>
+                            <button class="btn btn-outline-secondary add-btn btn-custom-color2 mb-2 mx-auto">Wypożycz</button>
                             <button class="btn btn-custom-color3 mx-auto" href="#">Przeglądaj</button>
                         </div>
                     </div>

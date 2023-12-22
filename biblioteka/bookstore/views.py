@@ -39,6 +39,34 @@ def checkout(request):
      context = {'items': items, 'order':order}
      return render(request, 'store/checkout.html', context)
 
+#Kategorie
+def categorieCriminal(request):
+     products = Product.objects.all()
+     context = {'products': products}
+     return render(request,'store/categorieCriminal.html',context)
+
+def categorieRomance(request):
+     products = Product.objects.all()
+     context = {'products': products}
+     return render(request,'store/categorieRomance.html',context)
+
+def categorieScientific(request):
+     products = Product.objects.all()
+     context = {'products': products}
+     return render(request,'store/categorieScientific.html',context)
+
+def categorieHorror(request):
+     products = Product.objects.all()
+     context = {'products': products}
+     return render(request,'store/categorieHorror.html',context)
+
+def categorieFantasy(request):
+     products = Product.objects.all()
+     context = {'products': products}
+     return render(request,'store/categorieFantasy.html',context)
+
+#koniec kategorii
+
 def updateItem(request):
      data = json.loads(request.body) # Pobiera dane z ciała żądania
      productId = data['productId']
@@ -62,3 +90,5 @@ def updateItem(request):
           orderItem.delete()
 
      return JsonResponse('Item was added', safe=False)
+
+
