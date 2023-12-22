@@ -20,7 +20,7 @@ for (i = 0; i < updateBtns.length; i++) {
 //var action = this.dataset.action;:  jak powyżej, ta linia kodu pobiera wartość atrybutu data-action z klikniętego elementu i zapisuje ją w zmiennej action.
 
 function updateUserOrder(productId, action) {
-	console.log("zalogowany, lecą dane");
+	console.log("zalogowany, przesyła dane");
 	var url = "/update_item/";
 
 	fetch(url, {
