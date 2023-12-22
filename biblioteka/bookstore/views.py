@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 
 
@@ -27,6 +27,19 @@ def books(request):
      
      context = {'products':products, 'items': items, 'order':order} #Tworzy się słownik context, który zawiera dane, jakie zostaną przekazane do szablonu Django (store.html). Tutaj, 'products' jest kluczem w słowniku, a wartością jest lista produktów z bazy danych.
      return render(request, 'store/books.html', context)
+
+def details(request, product_id):
+     book = get_object_or_404(Product, pk=product_id)
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False)
+          items = order.orderitem_set.all()
+     else:
+          items = []
+          order = {'get_cart_items': 0}
+
+     context = {'book': book, 'items': items, 'order': order}
+     return render(request, 'store/details.html', context)
 
 def digitals(request):
      products = Product.objects.all()

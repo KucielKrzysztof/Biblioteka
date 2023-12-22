@@ -23,23 +23,23 @@
 	  
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-			  <a class="nav-link" href="{% url 'books' %}">Książki</a>
+			<li class="nav-item {% if request.path == '/books/' %}active{% endif %}">
+				<a class="nav-link" href="{% url 'books' %}">Książki</a>
 			</li>
-			<li class="nav-item">
-			  <a class="nav-link" href="{% url 'digitals' %}">Pliki cyfrowe</a>
+			<li class="nav-item {% if request.path == '/digitals/' %}active{% endif %}">
+				<a class="nav-link" href="{% url 'digitals' %}">Pliki cyfrowe</a>
 			</li>
-			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Kategorie
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Something else here</a>
-			  </div>
-			</li>
+			<li class="nav-item dropdown {% if request.path == '/categories/' %}active{% endif %}">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Kategorie
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			</li>			
 		  </ul>
 		  <form class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0">
 			<div>

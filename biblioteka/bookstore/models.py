@@ -16,7 +16,8 @@ class Product(models.Model):
     genre = models.CharField(max_length=100, null=True) #gatunek ksiązki
     author = models.CharField(max_length=100, null=True)
     #description
-    isbn = models.CharField(max_length=17, null=True)#ISBN
+    id = models.AutoField(primary_key=True, editable=False) #autonumerowane pole jako pk
+    isbn = models.CharField(max_length=17, null=True) #ISBN
     #link dal pdf-ów
     image = models.ImageField(null=True, blank=True)
 
