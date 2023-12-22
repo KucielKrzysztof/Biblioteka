@@ -1,11 +1,11 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-<h2 class="text-center mt-4 mb-4 box-element product">Wszystkie książki</h2>
+<h2 class="text-center mt-4 mb-4 box-element product">Wszystkie pliki cyfrowe</h2>
     
 <div class="row align-items-stretch">
     {% for product in products %}
-    {% if product.digital == False%}
+    {% if product.digital == True%}
     <div class="mb-3 w-100">
         <div class="row no-gutters">
             <div class="col-3">
