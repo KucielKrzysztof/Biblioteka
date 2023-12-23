@@ -13,7 +13,10 @@ from datetime import timedelta #do obliczania daty zwrotu
 from django.views.decorators.csrf import ensure_csrf_cookie #upewnia się że jak wchodzisz pierwszy raz na te strone to pobierze ci token, tokeny są przechowywane w cookies a ktoś kto to odpala pierwszy raz w przeglądarce z jakiegoś powodu nie ma wygenerowanego tokenu więc nie ma go w cookies, nie ogarniam czemu
 @ensure_csrf_cookie
 def store(request):
+     query = request.GET.get('q') #pobiera do widoku parametr q  który przechowuje wartość wprowadzoną przez użytkownika do naszego search bara
      products = Product.objects.all()
+     if query:  # If a query parameter is present
+        products = products.filter(name__icontains=query)  # Filter products where the name contains the query string
      if request.user.is_authenticated:
           customer = request.user.customer
           order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
@@ -55,8 +58,11 @@ def checkout(request):
 @login_required #w setting.py  ustaw: LOGIN_URL = '/login/' - login = nazwa urla albo url
 def profile(request):
      customer = request.user.customer
+     order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+     items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
      orders = Order.objects.filter(customer=customer, complete=True)
-     context = {'orders': orders,'customer':customer}
+     
+     context = {'orders': orders,'customer':customer,'items': items, 'order':order}
      return render(request, 'store/profile.html', context)
 
 #nasz login views
@@ -224,10 +230,16 @@ def processOrder(request):
           order.transaction_id = transaction_id
           order.complete = True
           order.data_ordered = datetime.datetime.now()
+          response ={}
+          order.save()
           if customer.isTeacher==False:
                order.return_data = datetime.datetime.now() + timedelta(days=7)# + timedelta(days=7) #dodaje 30 dni do daty zwrotu
-          order.save()
+               response = {'transaction_id': transaction_id,
+                           }
+          elif customer.isTeacher==True:
+               response = {'transaction_id': transaction_id,
+                           }
      else:
           print('user is not logged in')
 
-     return JsonResponse('order submitted', safe=False)
+     return JsonResponse(response, safe=False)
