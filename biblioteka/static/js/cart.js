@@ -8,7 +8,8 @@ for (i = 0; i < updateBtns.length; i++) {
 
 		if (user == "AnonymousUser") {
 			console.log("nie zalogowany");
-			addCookieItem(productId, action);
+			//addCookieItem(productId, action);
+			alert("Zaloguj się aby dodać produkt do koszyka");
 		} else {
 			updateUserOrder(productId, action);
 		}
