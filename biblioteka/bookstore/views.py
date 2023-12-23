@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import JsonResponse
 import json
@@ -84,13 +84,51 @@ def myLogout(request):
 
 
 ###viewsy do stron z książkami
+def books(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request, 'store/books.html', context)
+
+def digitals(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+
+     context = {'products':products, 'items': items, 'order':order}
+     return render(request, 'store/digitals.html', context)
+
+def details(request, product_id):
+     book = get_object_or_404(Product, pk=product_id)
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False)
+          items = order.orderitem_set.all()
+     else:
+          items = []
+          order = {'get_cart_items': 0}
+
+     context = {'book': book, 'items': items, 'order': order}
+     return render(request, 'store/details.html', context)
 
 def categorieCriminal(request):
      products = Product.objects.all()
      if request.user.is_authenticated:
           customer = request.user.customer
-          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
-          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
      else:
           items = []
           order = {'get_cart_items':0, }
@@ -102,8 +140,8 @@ def categorieRomance(request):
      products = Product.objects.all()
      if request.user.is_authenticated:
           customer = request.user.customer
-          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
-          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
      else:
           items = []
           order = {'get_cart_items':0, }
@@ -115,8 +153,8 @@ def categorieScientific(request):
      products = Product.objects.all()
      if request.user.is_authenticated:
           customer = request.user.customer
-          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
-          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
      else:
           items = []
           order = {'get_cart_items':0, }
@@ -128,8 +166,8 @@ def categorieHorror(request):
      products = Product.objects.all()
      if request.user.is_authenticated:
           customer = request.user.customer
-          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
-          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
      else:
           items = []
           order = {'get_cart_items':0, }
@@ -141,8 +179,8 @@ def categorieFantasy(request):
      products = Product.objects.all()
      if request.user.is_authenticated:
           customer = request.user.customer
-          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
-          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) 
+          items = order.orderitem_set.all() 
      else:
           items = []
           order = {'get_cart_items':0, }

@@ -14,6 +14,9 @@ urlpatterns = [
     path('logout/', views.myLogout, name='logout'),
     
 	#pathy do stron z książkami
+    path('books/', views.books, name="books"),
+    path('digitals/', views.digitals, name="digitals"),
+    path('details/<int:product_id>/', views.details, name="details"),
     path('categorie_criminal/', views.categorieCriminal, name='categorie_criminal'),
     path('categorie_romance/', views.categorieRomance, name='categorie_romance'),
     path('categorie_fantasy/', views.categorieFantasy, name='categorie_fantasy'),
