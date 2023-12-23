@@ -13,4 +13,11 @@ urlpatterns = [
     path('login/', views.myLogin, name='login'),
     path('logout/', views.myLogout, name='logout'),
     
+	#pathy do stron z książkami
+    path('categorie_criminal/', views.categorieCriminal, name='categorie_criminal'),
+    path('categorie_romance/', views.categorieRomance, name='categorie_romance'),
+    path('categorie_fantasy/', views.categorieFantasy, name='categorie_fantasy'),
+    path('categorie_scientific/', views.categorieScientific, name='categorie_scientific'),
+    path('categorie_horror/', views.categorieHorror, name='categorie_horror'),
+    
 ]

@@ -51,6 +51,7 @@ def checkout(request):
      return render(request, 'store/checkout.html', context)
 
 
+
 @login_required #w setting.py  ustaw: LOGIN_URL = '/login/' - login = nazwa urla albo url
 def profile(request):
      customer = request.user.customer
@@ -81,6 +82,76 @@ def myLogout(request):
     return redirect('store') 
 #####
 
+
+###viewsy do stron z książkami
+
+def categorieCriminal(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request,'store/categorieCriminal.html',context)
+
+def categorieRomance(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request,'store/categorieRomance.html',context)
+
+def categorieScientific(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request,'store/categorieScientific.html',context)
+
+def categorieHorror(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request,'store/categorieHorror.html',context)
+
+def categorieFantasy(request):
+     products = Product.objects.all()
+     if request.user.is_authenticated:
+          customer = request.user.customer
+          order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
+          items = order.orderitem_set.all() #Pobranie wszystkich elementów zamówienia (OrderItem) dla danego zamówienia (Order)
+     else:
+          items = []
+          order = {'get_cart_items':0, }
+     
+     context = {'products':products, 'items': items, 'order':order} 
+     return render(request,'store/categorieFantasy.html',context)
+
+
+###functions to handle AJAX requests:
 def updateItem(request):
      data = json.loads(request.body) # Pobiera dane z ciała żądania
      productId = data['productId']
