@@ -15,8 +15,18 @@ form.addEventListener("submit", function (eventObject) {
 		.then((response) => response.json())
 		.then((data) => {
 			console.log("Success:", data);
-			alert("ZAKONCZONA TRANZAKCJA");
-			window.location.href = "/";
+			Swal.fire({
+				title: "Sukces!",
+				html:
+					"Możesz odebrać książki w bibliotece :)<br> ID wypożyczenia: " +
+					data.transaction_id,
+				icon: "success",
+				confirmButtonText: "Super",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = "/";
+				}
+			});
 		})
 		.catch((error) => console.error(error));
 

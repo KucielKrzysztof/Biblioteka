@@ -8,7 +8,15 @@ for (i = 0; i < updateBtns.length; i++) {
 
 		if (user == "AnonymousUser") {
 			console.log("nie zalogowany");
-			alert("Zaloguj się aby wypożyczyć ksiązkę");
+			Swal.fire({
+				title: "Zaloguj się, aby wypożyczyć książkę",
+				icon: "error",
+				confirmButtonText: "Rozumiem",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = "/login";
+				}
+			});
 		} else {
 			updateUserOrder(productId, action);
 		}

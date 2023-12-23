@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 	<link rel="icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> {% comment %} dodaje biblioteke do wyswietlania alertow {% endcomment %}
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<script type="text/javascript">
@@ -70,9 +71,9 @@
 			  </div>
 			</li>
 		  </ul>
-		  <form class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0">
+		  <form method="GET" action="{%url 'store'%}"class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0"> {% comment %} formularz wyśle zapytanie GET do widoku 'store' po naciśnięciu przycisku "Search". W widoku 'store' zostanie wyświetlona lista produktów, które zawierają w nazwie słowo wpisane w formularzu {% endcomment %}
 			<div>
-			<input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
+			<input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search" name="q">
 			<button class="btn btn-custom-color my-0 my-sm-0" type="submit">Search</button>
 			</div>
 		  </form>
