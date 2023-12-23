@@ -8,8 +8,7 @@ for (i = 0; i < updateBtns.length; i++) {
 
 		if (user == "AnonymousUser") {
 			console.log("nie zalogowany");
-			//addCookieItem(productId, action);
-			alert("Zaloguj się aby dodać produkt do koszyka");
+			alert("Zaloguj się aby wypożyczyć ksiązkę");
 		} else {
 			updateUserOrder(productId, action);
 		}
