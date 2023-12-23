@@ -37,6 +37,7 @@ class Order(models.Model): #koszyk
     data_ordered = models.DateTimeField(auto_now_add=True) #bieżąca data i godzina
     complete = models.BooleanField(default=False, null=True, blank=True)
     transaction_id = models.CharField(max_length=40, null=True)
+    return_data = models.DateTimeField(default=None, null=True, blank=True)  #data zwrotu
     #status = models.CharField(max_length=20, choices=[('wypożyczona', 'Wypożyczona'), ('zwrócona', 'Zwrócona')])
 
     def __str__(self):

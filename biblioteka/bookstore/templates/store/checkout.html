@@ -1,39 +1,21 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
+</br>
     <div class="row">
-	    <div class="col-lg-6">
-		    <div class="box-element" id="form-wrapper">
-                <form id="form">
-					<div id="user-info">
-						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Name..">
-						</div>
-						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
-						</div>
-					</div>
-					
-					
+	    
 
-					<hr>
-					<input id="form-button" class="btn btn-custom-color2 btn-block" type="submit" value="Continue">
-				</form>
-		    </div>
-		
-            <br>
-			<div class="box-element {% comment %}hidden{% endcomment %}" id="payment-info">
-				<small>Paypal Options</small>
-			</div>
-
-	    </div>
-
-	    <div class="col-lg-6">
+	    <div class=" col-12 ">
 		    <div class="box-element">
                 <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
 				<hr>
-				<h3>Order Summary</h3>
+				<h3>Książki, które chcesz wypożyczyć:</h3>
 				<hr>
+				<div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2"><strong>Książka:</strong></div>
+                    <div style="flex:1"><strong>Ilość:</strong></div>
+                </div>
 				{% for item in items %}
 				<div class="cart-row">
 					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
@@ -42,7 +24,32 @@
 				</div>
 				{% endfor %}
 				<h5>Książki:   {{order.get_cart_items}}</h5>
+				
 		    </div>
 	    </div>
+		
+		<div class="col-12 ">
+		    <div style="margin-top:1px;"class="box-element " id="form-wrapper">
+                <form id="form">
+					{% csrf_token %} {% comment %} token jest wymagany kiedy uzywamy metody post w django  {% endcomment %}
+					{% comment %} <div id="user-info">
+						<p style="text-align: center;">Zamów bez logowania:</p>
+						<div class="form-field">
+							<input required class="form-control" type="text" name="name" placeholder="Name..">
+						</div>
+						<div class="form-field">
+							<input  required class="form-control" type="email" name="email" placeholder="Email..">
+						</div>
+					</div> {% endcomment %}
+					<input id="form-button" class="btn btn-custom-color2 btn-block" type="submit" value="Wypożycz">
+				</form>
+		    </div>
+		
+            <br>
+
+	    </div>
+
+
     </div>
+	<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
 {% endblock content%}

@@ -5,7 +5,7 @@
 	<title>Book Store</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-
+	<link rel="icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
@@ -27,6 +27,7 @@
 			return cookieValue;
 		}
 		const csrftoken = getCookie('csrftoken');
+		console.log("CSRF token:", csrftoken);
 	</script> 
 	{% comment %}
 		{{request.user}} odnosi się do zalogowanego użytkownika w kontekście żądania HTTP. W Django, request.user przechowuje informacje o zalogowanym użytkowniku, który jest dostępny dla szablonów.
@@ -61,10 +62,11 @@
 				Kategorie
 			  </a>
 			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Action</a>
-				<a class="dropdown-item" href="#">Another action</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Something else here</a>
+				<a class="dropdown-item" href="{% url 'categorie_criminal' %}">Kryminały</a>
+				<a class="dropdown-item" href="{% url 'categorie_romance' %}">Romantyczne</a>
+				<a class="dropdown-item" href="{% url 'categorie_horror' %}">Horror</a>
+				<a class="dropdown-item" href="{% url 'categorie_fantasy' %}">Fantasy</a>
+				<a class="dropdown-item" href="{% url 'categorie_scientific' %}">Naukowe</a>
 			  </div>
 			</li>
 		  </ul>
@@ -75,8 +77,12 @@
 			</div>
 		  </form>
 		  	<div class="form-inline my-2 my-lg-0">
-			      <a href="#"class="btn btn-custom-color2">Zaloguj się</a>
-					
+				{% if request.user.is_authenticated %}
+					<a href="{% url 'profile' %}"class="btn btn-custom-color2">Cześć, {{request.user}}</a>
+					<a href="{% url 'logout' %}"class="btn btn-custom-color2">Wyloguj się</a>
+				{% else %}
+					<a href="{% url 'login' %}"class="btn btn-custom-color2">Zaloguj się</a>
+				{% endif %}
 			      <a href="{% url 'cart' %}">
 			        <img  id="cart-icon" src="{% static 'images/cartimg.png' %}">
 				   </a>
