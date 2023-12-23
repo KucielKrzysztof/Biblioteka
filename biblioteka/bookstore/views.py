@@ -115,6 +115,8 @@ def processOrder(request):
           order.transaction_id = transaction_id
           order.complete = True
           order.data_ordered = datetime.datetime.now()
+          if customer.isTeacher==False:
+               order.return_data = datetime.datetime.now() + timedelta(days=7)# + timedelta(days=7) #dodaje 30 dni do daty zwrotu
           order.save()
      else:
           print('user is not logged in')
