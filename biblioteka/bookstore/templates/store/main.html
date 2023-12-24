@@ -3,7 +3,11 @@
 <html>
 <head>
 	<title>Book Store</title>
-
+	<style>
+		body{
+			background-image: url('{% static "images/9226903.png" %}') !important;
+		}
+	</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 	<link rel="icon" href="{%static 'images/logo.png'%}" type="image/x-icon">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -53,13 +57,13 @@
 		<div class="collapse navbar-collapse " id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
 			<li class="nav-item">
-			  <a class="nav-link" href="{% url 'books' %}">Książki</a>
+			  <a class="nav-link active" href="{% url 'books' %}">Książki</a>
 			</li>
 			<li class="nav-item">
-			  <a class="nav-link" href="{% url 'digitals' %}">Ebooki</a>
+			  <a class="nav-link active" href="{% url 'digitals' %}">Ebooki</a>
 			</li>
 			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Kategorie
 			  </a>
 			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -74,7 +78,7 @@
 		  <form method="GET" action="{%url 'books'%}"class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0"> {% comment %} formularz wyśle zapytanie GET do widoku 'store' po naciśnięciu przycisku "Search". W widoku 'store' zostanie wyświetlona lista produktów, które zawierają w nazwie słowo wpisane w formularzu {% endcomment %}
 			<div>
 			<input class="form-control mr-sm-0" type="search" placeholder="szukaj ksiązki..." aria-label="Search" name="q">
-			<button class="btn btn-custom-color my-0 my-sm-0" type="submit">Wyszukaj</button>
+			<button class="btn btn-custom-color my-0 my-sm-0 btn-custom-color2" type="submit">Wyszukaj</button>
 			</div>
 		  </form>
 		  	<div class="form-inline my-2 my-lg-0">
@@ -103,10 +107,10 @@
 
 	<footer class="footer">
 		<div class="container">
-			<span class="text-muted">Website project made by students:</span>
-			<span class="text-muted">KK</span>
-			<span class="text-muted">KK</span>
-			<span class="text-muted">MK</span>
+			<span class="text">Website project made by students:</span><br>
+			<span class="text">KK</span><br>
+			<span class="text">KK</span><br>
+			<span class="text">MK</span>
 		</div>
 	</footer>
 
