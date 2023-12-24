@@ -5,7 +5,8 @@
     <h2 class="text-center mt-4 mb-4 box-element product">Polecane książki</h2>
     
 <div class="row align-items-stretch">
-	{% for product in products %}
+	{% for product in products%}
+	{% if forloop.counter|divisibleby:2 and forloop.counter <= 18%} {% comment %} co drugi i sprawia że wyświetla 9 {% endcomment %}
 	<div class="col-lg-4 d-flex flex-column">
 		<div class="h-100">
         <img class="thumbnail" src="{{product.imageURL}}" alt="tu powinna być okladka">
@@ -20,6 +21,7 @@
 		</div>
 	
 	</div>
+	{% endif %}
 	{% endfor %}
 </div>
 {% endblock content %}

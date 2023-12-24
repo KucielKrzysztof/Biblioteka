@@ -42,7 +42,7 @@
 </head>
 <body>
 	{% comment %} BootStrap NAVIGATION BAR	 {% endcomment %}
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="{% url 'store' %}"><img src="{%static 'images/logo.png'%}" width="30" height="30" class="d-inline-block align-top" alt="">
 		Biblioteka	
 		</a>
@@ -50,7 +50,7 @@
 		  <span class="navbar-toggler-icon"></span>
 		</button>
 	  
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<div class="collapse navbar-collapse " id="navbarSupportedContent">
 		  <ul class="navbar-nav mr-auto">
 			<li class="nav-item">
 			  <a class="nav-link" href="{% url 'books' %}">Książki</a>
@@ -71,7 +71,7 @@
 			  </div>
 			</li>
 		  </ul>
-		  <form method="GET" action="{%url 'store'%}"class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0"> {% comment %} formularz wyśle zapytanie GET do widoku 'store' po naciśnięciu przycisku "Search". W widoku 'store' zostanie wyświetlona lista produktów, które zawierają w nazwie słowo wpisane w formularzu {% endcomment %}
+		  <form method="GET" action="{%url 'books'%}"class="form-inline collapse navbar-collapse justify-content-center my-2 my-lg-0"> {% comment %} formularz wyśle zapytanie GET do widoku 'store' po naciśnięciu przycisku "Search". W widoku 'store' zostanie wyświetlona lista produktów, które zawierają w nazwie słowo wpisane w formularzu {% endcomment %}
 			<div>
 			<input class="form-control mr-sm-0" type="search" placeholder="szukaj ksiązki..." aria-label="Search" name="q">
 			<button class="btn btn-custom-color my-0 my-sm-0" type="submit">Wyszukaj</button>
@@ -80,7 +80,7 @@
 		  	<div class="form-inline my-2 my-lg-0">
 				{% if request.user.is_authenticated %}
 					<a href="{% url 'profile' %}"class="btn btn-custom-color2">Cześć, {{request.user}}</a>
-					<a href="{% url 'logout' %}"class="btn btn-custom-color2">Wyloguj się</a>
+					<a href="{% url 'logout' %}"class="btn btn-custom-color2 btn-custome-color-wyloguj">Wyloguj się</a>
 				{% else %}
 					<a href="{% url 'login' %}"class="btn btn-custom-color2">Zaloguj się</a>
 				{% endif %}
@@ -94,13 +94,21 @@
 	  </nav>
 	  {% comment %} /NAVIGATION BAR	 {% endcomment %}
 
-    <div class="container">
+    <div style="margin-top: 40px;"class="container">
 		{% block content%}
 		
 		{% endblock content%}
 		
 	</div>
 
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">Website project made by students:</span>
+			<span class="text-muted">KK</span>
+			<span class="text-muted">KK</span>
+			<span class="text-muted">MK</span>
+		</div>
+	</footer>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
