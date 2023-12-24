@@ -1,5 +1,9 @@
 body {
-	background-color: #adefd1ff;
+	/* background-color: #adefd1ff; */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
 	padding-top: 40px;
 
 	display: flex;
@@ -35,7 +39,7 @@ h6 {
 }
 
 .bg-dark {
-	background-color: #00203fff !important;
+	background-color: #e77728 !important;
 }
 
 #cart-icon {
@@ -109,10 +113,10 @@ h6 {
 	font-size: 25px;
 }
 .btn-custom-color {
-	background-color: #adefd1ff;
+	background-color: #713309;
 }
 .btn-custom-color2 {
-	background-color: #adefd1ff !important;
+	background-color: #713309 !important;
 	color: #ffffff;
 	text-shadow: 2px 2px 4px #000000;
 	border: none;
@@ -142,7 +146,7 @@ h6 {
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: #00203fff; /* Change this to match your theme */
+	background-color: #e77728; /* Change this to match your theme */
 	color: #ffffff !important; /* Change this to match your theme */
 	text-align: center;
 	padding: 10px;
