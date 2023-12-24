@@ -74,7 +74,7 @@ def myLogin(request):
             return redirect('store')
         else:
             # Return an 'invalid login' error message.
-            messages.error(request, 'Invalid login credentials')
+            messages.error(request, 'Niepoprawne dane logowania')
             return render(request, 'registration/login.html', {'messages': messages.get_messages(request)})
      else:
         return render(request, 'registration/login.html')
