@@ -13,10 +13,7 @@ from datetime import timedelta #do obliczania daty zwrotu
 from django.views.decorators.csrf import ensure_csrf_cookie #upewnia się że jak wchodzisz pierwszy raz na te strone to pobierze ci token, tokeny są przechowywane w cookies a ktoś kto to odpala pierwszy raz w przeglądarce z jakiegoś powodu nie ma wygenerowanego tokenu więc nie ma go w cookies, nie ogarniam czemu
 @ensure_csrf_cookie
 def store(request):
-     query = request.GET.get('q') #pobiera do widoku parametr q  który przechowuje wartość wprowadzoną przez użytkownika do naszego search bara
      products = Product.objects.all()
-     if query:  # If a query parameter is present
-        products = products.filter(name__icontains=query)  # Filter products where the name contains the query string
      if request.user.is_authenticated:
           customer = request.user.customer
           order, created = Order.objects.get_or_create(customer=customer, complete=False) # Pobranie lub utworzenie niezakończonego zamówienia dla tego klienta
@@ -91,7 +88,10 @@ def myLogout(request):
 
 ###viewsy do stron z książkami
 def books(request):
+     query = request.GET.get('q') #pobiera do widoku parametr q  który przechowuje wartość wprowadzoną przez użytkownika do naszego search bara
      products = Product.objects.all()
+     if query:  # If a query parameter is present
+        products = products.filter(name__icontains=query)  # Filter products where the name contains the query string
      if request.user.is_authenticated:
           customer = request.user.customer
           order, created = Order.objects.get_or_create(customer=customer, complete=False) 
