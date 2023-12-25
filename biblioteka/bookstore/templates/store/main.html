@@ -91,7 +91,14 @@
 			      <a href="{% url 'cart' %}">
 			        <img  id="cart-icon" src="{% static 'images/cartimg.png' %}">
 				   </a>
+
+				{% if is_login_page %}
+				<p id="cart-total">0</p>
+			   {% else %}
 			     <p id="cart-total">{{order.get_cart_items}}</p>
+				{% endif %}
+
+
 		   
 			</div>
 		</div>

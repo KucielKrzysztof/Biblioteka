@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required #importuje dekorator k
 from django.contrib.auth.views import LoginView #wbudowany login view w django
 from django.contrib.auth import authenticate, login, logout #wbudowane funkcje do logowania
 from datetime import timedelta #do obliczania daty zwrotu
+from django.db.models import Q #do tworzenia zapytań z wieloma warunkami
 
 
 from django.views.decorators.csrf import ensure_csrf_cookie #upewnia się że jak wchodzisz pierwszy raz na te strone to pobierze ci token, tokeny są przechowywane w cookies a ktoś kto to odpala pierwszy raz w przeglądarce z jakiegoś powodu nie ma wygenerowanego tokenu więc nie ma go w cookies, nie ogarniam czemu
@@ -62,8 +63,11 @@ def profile(request):
      context = {'orders': orders,'customer':customer,'items': items, 'order':order}
      return render(request, 'store/profile.html', context)
 
-#nasz login views
+#nasz login view
 def myLogin(request):
+     if request.user.is_authenticated: #jeśli zalogowany użytkownik próbuje wejść na stronę logowania to przekierowuje go na stronę główną
+        return redirect('store')
+
      if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -75,9 +79,9 @@ def myLogin(request):
         else:
             # Return an 'invalid login' error message.
             messages.error(request, 'Niepoprawne dane logowania')
-            return render(request, 'registration/login.html', {'messages': messages.get_messages(request)})
+            return render(request, 'registration/login.html', {'messages': messages.get_messages(request),'is_login_page': True})
      else:
-        return render(request, 'registration/login.html')
+        return render(request, 'registration/login.html', {'is_login_page': True})
 
 #logout view:
 def myLogout(request):
@@ -91,7 +95,7 @@ def books(request):
      query = request.GET.get('q') #pobiera do widoku parametr q  który przechowuje wartość wprowadzoną przez użytkownika do naszego search bara
      products = Product.objects.all()
      if query:  # If a query parameter is present
-        products = products.filter(name__icontains=query)  # Filter products where the name contains the query string
+        products = products.filter(Q(name__icontains=query) | Q(author__icontains=query))  # filtruje produkty po nazwie lub autorze
      if request.user.is_authenticated:
           customer = request.user.customer
           order, created = Order.objects.get_or_create(customer=customer, complete=False) 
@@ -231,7 +235,6 @@ def processOrder(request):
           order.complete = True
           order.data_ordered = datetime.datetime.now()
           response ={}
-          order.save()
           if customer.isTeacher==False:
                order.return_data = datetime.datetime.now() + timedelta(days=7)# + timedelta(days=7) #dodaje 30 dni do daty zwrotu
                response = {'transaction_id': transaction_id,
@@ -239,6 +242,7 @@ def processOrder(request):
           elif customer.isTeacher==True:
                response = {'transaction_id': transaction_id,
                            }
+          order.save()
      else:
           print('user is not logged in')
 

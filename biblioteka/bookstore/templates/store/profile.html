@@ -1,23 +1,27 @@
 {% extends 'store/main.html' %}
+{% load static %}
 {% block content %}
-<h1>Completed Orders</h1>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
-<ul>
-    {{customer.name}}
-{% for order in orders %}
-    <li>Order ID: {{ order.id }} </li>
-    <ul>
-    {% for item in order.orderitem_set.all %}
-        <li>{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
-        <li>Data wypozyczenia: - {{order.data_ordered}}</li>
-        {% if not order.return_data == None %}
-            <li>Data zwrotu: - {{order.return_data}}</li>
-        {% endif %}
+<div class="container mt-5">
+    <div class="card mb-4">
+    <h3 class="card-title text-center"><br>Cześć, {{customer.name}}.<br> Oto historia twoich wypożyczeń:<br><br></h3>
+    </div>
+    {% for order in orders %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h6 style="color:#e77728;"class="card-subtitle mt-2 mb-2 font-weight-bold">ID wypożyczenia: {{ order.id }}</h6>
+                <ul class="list-group list-group-flush">
+                    {% for item in order.orderitem_set.all %}
+                        <li class="list-group-item">{{ item.product.name }} - Quantity: {{ item.quantity }}</li>
+                    {% endfor %}
+                    <li class="list-group-item">Data wypozyczenia:  {{order.data_ordered}}</li>
+                    {% if not order.return_data == None %}
+                        <li class="list-group-item">Należy zwrócić do:  {{order.return_data}}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     {% endfor %}
-    </ul>
-{% endfor %}
-</ul>
+</div>
 {% endblock %}
-<script>
-   
-</script>
