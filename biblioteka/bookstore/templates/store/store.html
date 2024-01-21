@@ -6,7 +6,11 @@
     
 <div class="row align-items-stretch">
 	{% for product in products%}
-	{% if forloop.counter|divisibleby:2 and forloop.counter <= 18%} {% comment %} co drugi i sprawia że wyświetla 9 {% endcomment %}
+	{% if forloop.counter|divisibleby:2 and forloop.counter <= 18%} {% comment %}
+	 imituje polecane ksiazki bo nei ma sensu tego pisać, bierze elementy parzyste(licznik pętli podzielny przez 2)
+	limituje ilośc elementów wyświetlanych w polecanych tak żeby wyszło 9 (18/2=9)
+	 (sprawdza czy licznik pętli <=18)
+	{% endcomment %}
 	<div class="col-lg-4 d-flex flex-column">
 		<div class="h-100">
         <img class="thumbnail" src="{{product.imageURL}}" alt="tu powinna być okladka">
