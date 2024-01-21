@@ -12,12 +12,14 @@ class Customer(models.Model):
     
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
-    digital = models.BooleanField(default=False, null=True, blank=False)  #czy jest nie fizyczny
+    digital = models.BooleanField(default=False, null=True, blank=False)  #czy jest nie fizyczny czy pdf
     genre = models.CharField(max_length=100, null=True) #gatunek ksiązki
     author = models.CharField(max_length=100, null=True)
     #description
     isbn = models.CharField(max_length=17, null=True, blank=True, unique=True)
-    #link dal pdf-ów
+    imageURL = models.CharField(max_length=100, null=True)
+    #link = models.CharField(max_length=100, null=True)
+    #link dal pdf-ów # filanie nie dodany
     image = models.ImageField(null=True, blank=True)
 
     @property #dekorator pozwalający dotrzeć do tego jako atrybut a nie metoda
@@ -27,9 +29,7 @@ class Product(models.Model):
         except:
             url=''
         return url
-
-    def __str__(self):
-        return self.name
+# łapie nam url do obrazka żeby go łatwo wyświetlić na stronie (w html) chyba copilot to napisał juz nie pamiętam bo to dawno było
 
 
 class Order(models.Model): #koszyk
